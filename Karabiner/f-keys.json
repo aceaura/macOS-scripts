@@ -1,0 +1,88 @@
+{
+  "description": "F-key mappings (Windows-like, with Ctrl/Cmd swapped in System Preferences)",
+  "manipulators": [
+    {
+      "from": {
+        "key_code": "f2",
+        "modifiers": { "optional": ["any"] }
+      },
+      "to": [{ "key_code": "return_or_enter" }],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "f4",
+        "modifiers": {
+          "mandatory": ["option"],
+          "optional": ["any"]
+        }
+      },
+      "to": [
+        {
+          "key_code": "q",
+          "modifiers": ["command"]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "conditions": [
+        {
+          "bundle_identifiers": [
+            "^com\\.google\\.Chrome$",
+            "^com\\.microsoft\\.Edge$",
+            "^com\\.apple\\.Safari$"
+          ],
+          "type": "frontmost_application_if"
+        }
+      ],
+      "from": {
+        "key_code": "f5",
+        "modifiers": { "optional": ["any"] }
+      },
+      "to": [
+        {
+          "key_code": "r",
+          "modifiers": ["command"]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "f11",
+        "modifiers": { "optional": ["any"] }
+      },
+      "to": [
+        {
+          "key_code": "f",
+          "modifiers": ["control", "command"]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "conditions": [
+        {
+          "bundle_identifiers": [
+            "^com\\.google\\.Chrome$",
+            "^com\\.microsoft\\.Edge$",
+            "^com\\.apple\\.Safari$"
+          ],
+          "type": "frontmost_application_if"
+        }
+      ],
+      "from": {
+        "key_code": "f12",
+        "modifiers": { "optional": ["any"] }
+      },
+      "to": [
+        {
+          "key_code": "i",
+          "modifiers": ["command", "option"]
+        }
+      ],
+      "type": "basic"
+    }
+  ]
+}
