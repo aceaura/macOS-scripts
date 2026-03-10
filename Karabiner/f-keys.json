@@ -2,6 +2,15 @@
   "description": "F-key mappings (Windows-like, with Ctrl/Cmd swapped in System Preferences)",
   "manipulators": [
     {
+      "conditions": [
+        {
+          "bundle_identifiers": [
+            "^com\\.apple\\.finder$",
+            "^com\\.apple\\.Desktop$"
+          ],
+          "type": "frontmost_application_if"
+        }
+      ],
       "from": {
         "key_code": "f2",
         "modifiers": { "optional": ["any"] }
