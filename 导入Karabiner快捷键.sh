@@ -47,21 +47,13 @@ MERGED_RULES=$(jq -s '.' "${RULE_FILES[@]}")
 
 # 删除旧的 complex_modifications rules 并写入新规则
 # 保留 profiles 中的其他设置（name, selected, virtual_hid_keyboard 等）
-SIMPLE_MODS='[
-    {"from":{"key_code":"left_command"},"to":[{"key_code":"left_control"}]},
-    {"from":{"key_code":"left_control"},"to":[{"key_code":"left_command"}]},
-    {"from":{"key_code":"right_command"},"to":[{"key_code":"right_control"}]},
-    {"from":{"key_code":"right_control"},"to":[{"key_code":"right_command"}]}
-]'
-
-jq --argjson rules "$MERGED_RULES" --argjson smods "$SIMPLE_MODS" '
+jq --argjson rules "$MERGED_RULES" '
     .profiles[0].complex_modifications.rules = $rules |
-    .profiles[0].simple_modifications = $smods
+    .profiles[0].simple_modifications = []
 ' "$KARABINER_CONFIG" > "${KARABINER_CONFIG}.tmp"
 mv "${KARABINER_CONFIG}.tmp" "$KARABINER_CONFIG"
 
 echo "✅ 已清除旧快捷键并导入新规则"
-echo "✅ 已交换 Command ↔ Control 键"
 echo ""
 
 # 显示导入的规则摘要
