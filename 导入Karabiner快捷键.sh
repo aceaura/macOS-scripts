@@ -37,11 +37,6 @@ for f in "${RULE_FILES[@]}"; do
     echo "   - $(basename "$f")"
 done
 
-# 备份当前配置
-BACKUP="$KARABINER_CONFIG.backup.$(date +%Y%m%d%H%M%S)"
-cp "$KARABINER_CONFIG" "$BACKUP"
-echo "💾 已备份当前配置到: $BACKUP"
-
 # 合并所有规则文件为一个 JSON 数组
 MERGED_RULES=$(jq -s '.' "${RULE_FILES[@]}")
 

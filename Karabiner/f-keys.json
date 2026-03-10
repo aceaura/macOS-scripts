@@ -43,7 +43,7 @@
       "to": [
         {
           "key_code": "r",
-          "modifiers": ["command"]
+          "modifiers": ["control"]
         }
       ],
       "type": "basic"
@@ -79,7 +79,7 @@
       "to": [
         {
           "key_code": "i",
-          "modifiers": ["command", "option"]
+          "modifiers": ["control", "option"]
         }
       ],
       "type": "basic"

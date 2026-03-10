@@ -37,6 +37,38 @@
             "from": {
                 "key_code": "tab",
                 "modifiers": {
+                    "mandatory": ["control"],
+                    "optional": ["any"]
+                }
+            },
+            "to": [
+                {
+                    "key_code": "close_bracket",
+                    "modifiers": ["control", "shift"]
+                }
+            ],
+            "type": "basic"
+        },
+        {
+            "from": {
+                "key_code": "tab",
+                "modifiers": {
+                    "mandatory": ["control", "shift"],
+                    "optional": ["any"]
+                }
+            },
+            "to": [
+                {
+                    "key_code": "open_bracket",
+                    "modifiers": ["control", "shift"]
+                }
+            ],
+            "type": "basic"
+        },
+        {
+            "from": {
+                "key_code": "tab",
+                "modifiers": {
                     "mandatory": ["command"],
                     "optional": ["any"]
                 }
