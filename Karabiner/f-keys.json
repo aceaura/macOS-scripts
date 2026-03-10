@@ -28,8 +28,8 @@
       },
       "to": [
         {
-          "key_code": "q",
-          "modifiers": ["command"]
+          "key_code": "w",
+          "modifiers": ["control"]
         }
       ],
       "type": "basic"
