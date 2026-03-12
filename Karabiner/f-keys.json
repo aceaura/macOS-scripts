@@ -59,7 +59,7 @@
     },
     {
       "from": {
-        "key_code": "f11",
+        "key_code": "f8",
         "modifiers": { "optional": ["any"] }
       },
       "to": [
