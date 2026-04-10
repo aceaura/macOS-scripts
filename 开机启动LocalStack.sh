@@ -29,6 +29,26 @@ get_status() {
 }
 
 enable_autostart() {
+    # 创建启动包装脚本，等待 Docker 就绪后再启动 LocalStack
+    WRAPPER="$HOME/.local/bin/localstack-start.sh"
+    mkdir -p "$(dirname "$WRAPPER")"
+    cat > "$WRAPPER" << 'SCRIPT'
+#!/bin/bash
+MAX_WAIT=300
+WAITED=0
+while ! docker info > /dev/null 2>&1; do
+    if [ "$WAITED" -ge "$MAX_WAIT" ]; then
+        echo "$(date): Docker 未能在 ${MAX_WAIT} 秒内启动，放弃" >&2
+        exit 1
+    fi
+    sleep 5
+    WAITED=$((WAITED + 5))
+done
+echo "$(date): Docker 已就绪，等待了 ${WAITED} 秒"
+localstack start -d
+SCRIPT
+    chmod +x "$WRAPPER"
+
     cat > "$PLIST_PATH" << EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -38,9 +58,7 @@ enable_autostart() {
     <string>${PLIST_NAME}</string>
     <key>ProgramArguments</key>
     <array>
-        <string>${LOCALSTACK_BIN}</string>
-        <string>start</string>
-        <string>-d</string>
+        <string>${WRAPPER}</string>
     </array>
     <key>RunAtLoad</key>
     <true/>
@@ -48,6 +66,11 @@ enable_autostart() {
     <string>${HOME}/Library/Logs/localstack.log</string>
     <key>StandardErrorPath</key>
     <string>${HOME}/Library/Logs/localstack.error.log</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
 </dict>
 </plist>
 EOF
